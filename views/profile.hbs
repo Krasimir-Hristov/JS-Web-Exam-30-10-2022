@@ -1,0 +1,48 @@
+    {{#with user}}
+        <section id="user">
+            <div class="user-info">
+                <div class="user-logo">
+                    <img src="/static/images/user-logo.webp">
+                </div>
+                <h1 class="user-email">{{email}}</h1>
+                <h2 class="created-blogs-count">Total Created Blogs: {{postsCount}}</h2>
+                <h2 class="followed-blogs-count">Total Followed Blogs: {{followedCount}}</h2>
+            </div>
+        </section>
+
+
+        <section class="profile-blogs">
+            <div class="created-blogs">
+                <h2 class="section-title">Created Blogs</h2>
+                <div class="info">
+                    {{#each posts}}
+                    <h2 class="title">{{title}}</h2>
+                    <h4 class="genre">{{category}}</h4>
+                    <div class="see-more">
+                        <a href="/catalog/{{_id}}">See More...</a>
+                    </div>
+                </div>
+                        {{else}}
+                    <h2 class="no-blog-in-profile">You haven't published a blog yet...</h2>
+                    {{/each}}
+            </div>
+            <div class="followed-blogs">
+                <h2 class="section-title">Followed Blogs</h2>
+                <div class="info">
+                {{#each follows}}
+
+                    <h2 class="title">{{title}}</h2>
+                    <h4 class="genre">{{category}}</h4>
+                    <div class="see-more">
+                        <a href="/catalog/{{_id}}">See More...</a>
+                    </div>
+                </div>
+               
+                {{else}}
+                <h2 class="no-blog-in-profile">You have no blogs followed yet…</h2>
+                {{/each}}
+            </div>
+
+        </section>
+        {{/with}}
+  

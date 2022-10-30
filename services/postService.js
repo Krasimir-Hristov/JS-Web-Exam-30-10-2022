@@ -3,49 +3,73 @@ const Post = require('../models/Post');
 
 //TODO care for the populate fields must be in the SCHEMA !!!!
 async function getPostsAndUsers(id) {
-    return Post.findById(id).populate('author').populate('usersShared').lean();
+    return Post.findById(id).populate('owner').populate('followers').lean();
 }
 
 async function getPostById(id) {
     return Post.findById(id).lean();
 }
 
-// async function updatePublication(id, publication) {
-//     const existing = await Publication.findById(id);
+async function createPost(post) {
+    const result= new Post(post);
+    await result.save();
+}
 
-//      existing.title = publication.title;
-//      existing.technique = publication.technique;
-//      existing.picture = publication.picture;
-//      existing.certificate = publication.certificate;
+async function getRecent() {
+    return Post.find({}).sort().limit(3).lean();
+}
 
-//      await existing.save();
-// }
+async function getAllPosts() {
+    return Post.find({}).lean();
+}
 
-// async function deletePublication(id) {
-//     await Publication.findByIdAndDelete(id);
-// }
+async function updatePost(id, post) {
+    const existing = await Post.findById(id);
 
-// async function sharePublication(publicationId, userId) {
-//     const publication = await Publication.findById(publicationId);
+     existing.title = post.title;
+     existing.postImg = post.postImg;
+     existing.content = post.content;
+     existing.category = post.category;
 
-//     if(publication.usersShared.includes(userId)) {
-//         throw new Error('You already share this publication');
-//     }
+     await existing.save();
+}
 
-//     publication.usersShared.push(userId);
-//     await publication.save();
-// }
+async function deletePost(id) {
+    await Post.findByIdAndDelete(id);
+}
 
-// async function getPublicationsByUser(userId) {
-//     return Publication.find({ author: userId }).lean();
-// }
+async function followPost(postId, userId) {
+    const post = await Post.findById(postId);
 
-// async function getSharesByUser(userId) {
-//     return Publication.find({ usersShared: userId }).lean();
-// }
+    if(post.followers.includes(userId)) {
+        throw new Error('You already follow this post');
+    }
+
+    post.followers.push(userId);
+    await post.save();
+}
+
+async function getPostsByUser(userId) {
+    return Post.find({ owner: userId }).lean();
+}
+
+async function getFollowsByUser(userId) {
+    return Post.find({ followers: userId }).lean();
+}
+
+
+
 
 
 module.exports = {
     getPostsAndUsers,
-    getPostById
+    getPostById,
+    createPost,
+    getRecent,
+    getAllPosts,
+    updatePost,
+    deletePost,
+    followPost,
+    getPostsByUser,
+    getFollowsByUser
 }

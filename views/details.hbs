@@ -1,0 +1,41 @@
+{{#with post}}
+<div class="details-container">
+    <div class="details-container-image">
+        <img src="./images/around-the-world.jpeg">
+    </div>
+    <div class="details-container-info">
+        <h2>{{title}}</h2>
+        <h3>{{category}}</h3>
+        <h3>By: {{owner.email}}</h3>
+        {{#if followersList}}
+        <h4>Follow By: {{followersList}}</h4>
+        {{else}}
+        <h4>There are no followers yet!</h4>
+        {{/if}}
+    </div>
+    <div class="details-container-content">
+        <p>Hi friends! How was the weekend? I hope you had an amazing one. This blog post is a way to bring it back old
+            school and share some more real-life adventures. Quite a few of you let me know that you missed the style of
+            blogging from the past (I do, too!) so I'm trying to do it in a way that's low-key and still focused on my
+            experience, instead of the kids' experience if that makes sense? It can be tricky because the kids are
+            obviously a huge part of my life (and by far the most exciting and such an enjoyable part of my life). I'm
+            still trying to navigate blogging in a way that feels authentic to me without overdoing it on kid content,
+            while continuing to create value-driven posts, too.</p>
+    </div>
+    <div class="btn-container">
+        {{#if hasUser}}
+         {{#if isOwner}}
+
+        <a href="/edit/{{_id}}">Edit</a>
+        <a href="/delete/{{_id}}">Delete</a>
+        {{else}}
+        {{#if isFollowed}}
+        <p class="follow-pub">You already follow this blog!</p>
+        {{else}}
+        <a href="/follow/{{_id}}">Follow</a>
+        {{/if}}
+        {{/if}}
+        {{/if}}
+    </div>
+</div>
+{{/with}}

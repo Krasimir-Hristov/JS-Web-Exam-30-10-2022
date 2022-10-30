@@ -17,7 +17,6 @@ function isGuest() {
         }
     };
 }
-//TODO Care for the fields names !!!!
 function isOwner() {
     return function (req, res, next) {
         const userId = req.session.user?._id;

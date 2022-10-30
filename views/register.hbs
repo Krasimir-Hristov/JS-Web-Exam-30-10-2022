@@ -1,10 +1,17 @@
-<h1>Register</h1>
-<form action="/register" method="post">
-<label>Username: <input type="text" name="username" value="{{data.username}}" ></label><br>
-<label>Password: <input type="text" name="password" ></label><br>
-<label>Repeat: <input type="text" name="repass" ></label><br>
-<input type="submit" value="Register">
-</form>
 
-
-
+        <div class="register-box">
+            <h1>Register</h1>
+            <form action="/register" method="post">
+                <label>Username</label>
+                <input type="text" placeholder="Username.." name="username">
+                <label>Email</label>
+                <input type="text" placeholder="Email.." name="email">
+                <label>Password</label>
+                <input type="password" placeholder="Password.." name="password">
+                <label>Confirm Password</label>
+                <input type="password" placeholder="Confirm Password.." name="repass">
+                <input type="submit" value="Submit">
+            </form>
+            <p>Already have an account? <a href="/login">Login here</a></p>
+        </div>
+   
